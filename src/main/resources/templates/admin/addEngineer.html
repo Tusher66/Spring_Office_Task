@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Admin Page</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/home.css}" />
+<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+	<div class="container">
+	
+		
+		
+		<!-- Importing Navbar -->
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" >
+  <div class="container">
+    <a class="navbar-brand" href="#">Project Management App</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      
+        <li class="nav-item">
+          <a class="nav-link" href="http://localhost:8080/admin/home">Home</a>
+        </li>
+        
+     
+      </ul>
+      
+      
+      <form th:action="@{/logout}" method="get" class="d-flex">
+			<button class="btn btn-md btn-danger btn-block" name="registration"
+				type="Submit">Logout</button>
+		</form>
+		
+		<form action="/admin/findById" method="POST" class="d-flex">
+        <input class="form-control me-2" type="text" name="pId" placeholder="Search By Id" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>
+
+<br>
+
+
+<div class="col-sm-6 ">
+			<fieldset >
+   				<legend  class="float-none w-auto p-2"> Add Programmer</legend>
+				<form action="/admin/addProgrammer1" method="post" enctype="multipart/formdata" >
+					<div class="mb-3">
+					  <label for="exampleFormControlInput1" class="form-label">Name</label>
+					  <input type="text" name="pName" class="form-control" id="exampleFormControlInput1" placeholder="Programmer Name">
+					</div>
+					
+					<div class="mb-3">
+					  <label for="pDept" class="form-label">Department</label>
+					  <input type="text" name="pDept" class="form-control" id="pDept" placeholder="Programmer Department">
+					</div>
+					
+					<div class="mb-3">
+					  <label for="exampleFormControlInput2" class="form-label">Language</label>
+					  <input type="text" name="pLang" class="form-control" id="exampleFormControlInput2" placeholder="Programmer Language">
+					</div>
+					
+					<div class="mb-3">
+					  <label for="pAddress" class="form-label">Address</label>
+					  <input type="text" name="pAddress" class="form-control" id="pAddress" placeholder="Programmer Address">
+					</div>
+					
+					<div>
+					<button type="submit"  class="btn btn-primary">Add</button>
+					<a href="" type="button" class="btn btn-primary">Cancel</a>
+					</div>
+				</form>
+			</fieldset><br>
+
+	</div>
+	</div>
+	
+</body>
+</html>

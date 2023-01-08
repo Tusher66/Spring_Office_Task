@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Admin Page</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/home.css}" />
+<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!--<script type="text/javascript" th:src="@{/js/home.js}"></script>-->
+</head>
+
+<body>
+	<div class="container">
+	
+		
+		
+		<!-- Importing Navbar -->
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" >
+  <div class="container">
+    <a class="navbar-brand" href="#">Project Management App</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      
+        <li class="nav-item">
+          <a class="nav-link" href="http://localhost:8080/admin/home">Home</a>
+        </li>
+        
+     
+      </ul>
+      
+      
+      <form th:action="@{/logout}" method="get" class="d-flex">
+			<button class="btn btn-md btn-danger btn-block" name="registration"
+				type="Submit">Logout</button>
+		</form><br>
+		
+		<form action="/admin/findById" method="POST" class="d-flex">
+        <input class="form-control me-2" type="text" name="pId" placeholder="Search By Id" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>
+
+<br>
+
+
+<div class="col">
+          <a class="btn btn-primary" href="/admin/addPage">
+          <i class="fa fa-plus-square ml-2"> Add Engineer</i></a>
+</div>
+
+<!--<div class="col">
+                        <div class="input-group date">
+                            <input autocomplete="off" class="form-control" id="searchDtSt" type="text"/>
+                            <div class="input-group-append">
+                                <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                            </div>
+                        </div>
+</div>-->
+
+<!--<div class="row">
+<div class="col-sm-6 ">
+			<fieldset >
+   				<legend  class="float-none w-auto p-2"> Add Programmer</legend>
+				<form action="/admin/addProgrammer1" method="post" enctype="multipart/formdata" >
+					<div class="mb-3">
+					  <label for="exampleFormControlInput1" class="form-label">Name</label>
+					  <input type="text" name="pName" class="form-control" id="exampleFormControlInput1" placeholder="Programmer Name">
+					</div>
+					
+					<div class="mb-3">
+					  <label for="pDept" class="form-label">Department</label>
+					  <input type="text" name="pDept" class="form-control" id="pDept" placeholder="Programmer Department">
+					</div>
+					
+					<div class="mb-3">
+					  <label for="exampleFormControlInput2" class="form-label">Language</label>
+					  <input type="text" name="pLang" class="form-control" id="exampleFormControlInput2" placeholder="Programmer Language">
+					</div>
+					
+					<div class="mb-3">
+					  <label for="pAddress" class="form-label">Address</label>
+					  <input type="text" name="pAddress" class="form-control" id="pAddress" placeholder="Programmer Address">
+					</div>
+					
+					<div>
+					<button type="submit"  class="btn btn-primary">Add</button>
+					<a href="" type="button" class="btn btn-primary">Cancel</a>
+					</div>
+				</form>
+			</fieldset><br>
+
+	</div>-->
+	
+	
+	<div >
+		<fieldset >
+   		<legend  class="float-none w-auto p-2">Engineer</legend>
+		<table class="table table-striped table-responsive-md" >
+  <thead class="table-dark">
+     <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Language</th>
+      <th scope="col">Dept.</th>
+      <th scope="col">Addresss</th>
+      <th scope="col">Join Date</th>
+      <th scope="col">Edit</th>
+      <th scope="col">Delete</th>
+      
+       <!--<th scope="col">Update</th>
+        <th scope="col">Delete</th>
+      <th scope="col">Status</th>
+      <th scope="col">Update</th>
+      -->
+  </thead>
+  <tbody>
+    <tr th:each="engineer:${engineers}">
+      <td th:text="${engineer.pId}" ></td>
+      <td th:text="${engineer.pName}" ></td>
+      <td th:text="${engineer.pDept}" ></td>
+      <td th:text="${engineer.pLang}" ></td>
+      <td th:text="${engineer.pAddress}" ></td>
+      <td th:text="${engineer.join_date}" ></td>
+      <td><a th:href="@{/admin/edit/{pId}(pId=${engineer.pId})}" class="btn btn-primary">Edit</a></td>
+      <!--<td><a th:href="@{/deleteProgrammer1/{pId}(pId=${engineer.pId})}" class="btn btn-primary">Delete</a></td>-->
+      <td><a type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal"
+      		th:attr="data-bs-target='#deleteModal'+${engineer.pId}">Delete</a></td>
+      		
+      <div class="modal fade" th:id="'deleteModal'+${engineer.pId}" aria-labelledby="exampleModalLabel" aria-hidden="true">
+   <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Confirm delete</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure want to delete this Programmer Information?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+        <a th:href="@{/admin/deleteProgrammer1/{pId}(pId=${engineer.pId})}" type="button" class="btn btn-danger">&nbsp;Yes</a>
+      </div>
+    </div>
+  </div>
+</div>
+    </tr>
+    
+     
+  </tbody>
+</table>
+</fieldset>
+		</div>
+</div>		
+	
+	
+	
+	<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script>
+    $('.input-group.date').datepicker({
+        autoclose: true,
+        todayHighlight: true
+    });
+
+</script>
+</body>
+</html>
